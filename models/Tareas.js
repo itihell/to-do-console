@@ -21,6 +21,14 @@ class Tareas {
     const tarea = new Tarea(description);
     this._listado[tarea.id] = tarea;
   }
+
+  parsearTareas(data = []) {
+    this._listado = data.map((item) => {
+      const tarea = [];
+      tarea[item.id] = item;
+      return tarea;
+    });
+  }
 }
 
 module.exports = Tareas;
