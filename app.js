@@ -18,7 +18,7 @@ const main = async () => {
         tareas.crear(description);
         break;
       case "2":
-        console.log(tareas._listado);
+        console.log(tareas.listado);
         break;
 
       default:
