@@ -45,6 +45,7 @@ const main = async () => {
         if (tarea !== "0") {
           if (await confirmar("Está seguro".red)) {
             tareas.destroy(tarea);
+            console.log("Tarea borrada".green);
           } else {
             console.log();
             console.log("Operación cancelada".green);
