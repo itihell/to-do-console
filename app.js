@@ -6,6 +6,7 @@ const {
   pause,
   leer,
   listarTareasABorrar,
+  confirmar,
 } = require("./helpers/inquirer");
 
 const Tareas = require("./models/Tareas");
@@ -41,7 +42,18 @@ const main = async () => {
         break;
       case "6":
         const tarea = await listarTareasABorrar(tareas.listado);
-        tareas.destroy(tarea);
+        if (tarea !== "0") {
+          if (await confirmar("Está seguro".red)) {
+            tareas.destroy(tarea);
+          } else {
+            console.log();
+            console.log("Operación cancelada".green);
+          }
+        } else {
+          console.log();
+          console.log("Operación cancelada".green);
+        }
+
         break;
 
       default:

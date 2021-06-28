@@ -1,3 +1,4 @@
+const { green } = require("colors");
 const inquirer = require("inquirer");
 require("colors");
 
@@ -84,17 +85,19 @@ const leer = async (message) => {
 };
 
 const listarTareasABorrar = async (tareas) => {
-  //Creando las choices
-
   const items = tareas.map((item, index) => {
-    const tarea = {
+    return {
       value: item.id,
       name: `${((index + 1).toString() + ".").green} ${item.description}`,
     };
-    return tarea;
   });
 
-  let toDelete = [
+  items.unshift({
+    value: "0",
+    name: `${"0.".green} Cancelar`,
+  });
+
+  const questions = [
     {
       type: "list",
       name: "tarea",
@@ -103,9 +106,22 @@ const listarTareasABorrar = async (tareas) => {
     },
   ];
 
-  const { tarea } = await inquirer.prompt(toDelete);
+  const { tarea } = await inquirer.prompt(questions);
 
   return tarea;
+};
+
+const confirmar = async (message = "") => {
+  const questions = [
+    {
+      type: "confirm",
+      name: "ok",
+      message: message,
+    },
+  ];
+  const { ok } = await inquirer.prompt(questions);
+
+  return ok;
 };
 
 module.exports = {
@@ -113,4 +129,5 @@ module.exports = {
   pause,
   leer,
   listarTareasABorrar,
+  confirmar,
 };
