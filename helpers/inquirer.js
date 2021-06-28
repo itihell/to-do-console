@@ -83,8 +83,34 @@ const leer = async (message) => {
   return description;
 };
 
+const listarTareasABorrar = async (tareas) => {
+  //Creando las choices
+
+  const items = tareas.map((item, index) => {
+    const tarea = {
+      value: item.id,
+      name: `${((index + 1).toString() + ".").green} ${item.description}`,
+    };
+    return tarea;
+  });
+
+  let toDelete = [
+    {
+      type: "list",
+      name: "tarea",
+      message: "Qué tarea desea borrar...?",
+      choices: items,
+    },
+  ];
+
+  const { tarea } = await inquirer.prompt(toDelete);
+
+  return tarea;
+};
+
 module.exports = {
   inquirerMenus,
   pause,
   leer,
+  listarTareasABorrar,
 };
