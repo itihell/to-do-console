@@ -43,7 +43,8 @@ const main = async () => {
         break;
       case "5":
         const ids = await listarTareasCheckList(tareas.listado);
-        console.log(ids);
+        //console.log(ids);
+        tareas.changedCompled(ids);
         break;
       case "6":
         const tarea = await listarTareasABorrar(tareas.listado);

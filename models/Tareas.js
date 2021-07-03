@@ -70,6 +70,21 @@ class Tareas {
     const tarea = `${index}.`.green + ` ${item.description} :: ${alerta}`;
     console.log(tarea);
   }
+
+  changedCompled(ids = []) {
+    const tareas = ids.map((item, index) => {
+      if (!this._listado[item].completed) {
+        this._listado[item].completed = new Date().toISOString();
+      }
+      return item;
+    });
+
+    const pendientes = this.listado.map((item, index) => {
+      if (!ids.includes(item.id)) {
+        return (this._listado[item.id].completed = null);
+      }
+    });
+  }
 }
 
 module.exports = Tareas;
